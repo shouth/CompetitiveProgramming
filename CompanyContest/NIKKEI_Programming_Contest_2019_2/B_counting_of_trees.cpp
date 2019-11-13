@@ -4,13 +4,13 @@ using namespace std;
 constexpr int MOD = 998244353;
 
 int64_t modpow(int64_t x, int64_t n) {
-  int64_t ret = 1;
-  while(n > 0) {
-    if(n & 1) (ret *= x) %= MOD;
-    (x *= x) %= MOD;
-    n >>= 1;
-  }
-  return ret;
+    int64_t ret = 1;
+    while(n > 0) {
+        if(n & 1) (ret *= x) %= MOD;
+        (x *= x) %= MOD;
+        n >>= 1;
+    }
+    return ret;
 }
 
 int main() {
