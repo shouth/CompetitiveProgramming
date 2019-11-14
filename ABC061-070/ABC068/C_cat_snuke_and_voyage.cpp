@@ -12,6 +12,8 @@ int main() {
         c[b].push_back(a);
     }
     vector<int> v;
+    sort(begin(c[1]), end(c[1]));
+    sort(begin(c[n]), end(c[n]));
     set_intersection(begin(c[1]), end(c[1]), begin(c[n]), end(c[n]), back_inserter(v));
     cout << (!v.empty() ? "POSSIBLE" : "IMPOSSIBLE") << endl;
 }
