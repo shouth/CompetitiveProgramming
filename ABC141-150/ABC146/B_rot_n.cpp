@@ -8,7 +8,6 @@ int main() {
     cin >> s;
 
     for (auto& e : s) {
-        char d = (e - 'A' + n) % 26 + 'A';
-        cout << d;
+        cout << (char) ((e - 'A' + n) % 26 + 'A');
     }
 }
