@@ -33,14 +33,7 @@ int main() {
         railtree.unite(r, s);
     }
 
-    map<int, vector<int>> roadcity;
-    for (int i = 0; i < n; i++) roadcity[roadtree.find(i)].push_back(i);
-
-    vector<int> ans(n);
-    for (auto& rc : roadcity) {
-        map<int, int> tmp;
-        for (auto& e : rc.second) tmp[railtree.find(e)]++;
-        for (auto& e : rc.second) ans[e] = tmp[railtree.find(e)];
-    }
-    for (auto& e : ans) cout << e << endl;
+    map<pair<int, int>, int> count;
+    for (int i = 0; i < n; i++) count[make_pair(roadtree.find(i), railtree.find(i))]++;
+    for (int i = 0; i < n; i++) cout << count[make_pair(roadtree.find(i), railtree.find(i))] << endl;
 }
