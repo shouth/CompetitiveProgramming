@@ -1,4 +1,5 @@
 sample.cpp
+sample.py
 .vscode/*
 !.vscode/settings.json 
 !.vscode/tasks.json 
