@@ -18,11 +18,10 @@ int main() {
         return 0;
     }
 
-    vector<double> p { 1 };
-    for (int i = 1; i <= n; i++) {
-        vector<double> q(i+1);
-        for (int j = 0; j < p.size(); j++) q[j] += p[j] / 2, q[j+1] += p[j] / 2;
-        p = move(q);
+    vector<double> p(n+1);
+    p[0] = 1;
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j >= 0; j--) p[j] /= 2, p[j+1] += p[j];
     }
 
     cout << fixed << setprecision(20) << p[xs / 2] * p[ys / 2] << endl;
