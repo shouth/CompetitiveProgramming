@@ -11,12 +11,12 @@ struct bit {
     bit(i32 n): t(vector<i32>(n+1, 0)), n(n+1) {}
 
     void add(i32 i, i32 x) {
-        for (i32 a = i; a <= n; a += a & -a) t[a] += x;
+        for (; i <= n; i += i & -i) t[i] += x;
     }
 
     i32 sum(i32 i) {
         i32 res = 0;
-        for (i32 a = i; a > 0; a -= a & -a) res += t[a];
+        for (; i > 0; i -= i & -i) res += t[i];
         return res;
     }
 };
