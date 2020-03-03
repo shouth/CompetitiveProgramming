@@ -37,14 +37,15 @@ int main() {
     for (i32 x = 0; x < q; x++) {
         i32 o;
         cin >> o;
-        if (o == 1) {
+        switch (o) {
+        case 1:
             i32 i;
             char c;
             cin >> i >> c;
             count[s[i-1] - 'a'].add(i, -1);
             count[c - 'a'].add(i, 1);
             s[i-1] = c;
-        } else {
+        case 2:
             i32 l, r;
             cin >> l >> r;
             i32 ans = 0;
