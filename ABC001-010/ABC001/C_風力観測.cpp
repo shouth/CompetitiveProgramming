@@ -2,22 +2,17 @@
 using namespace std;
 
 int main() {
-    int dir, w;
-    cin >> dir >> w;
+    int deg, dis;
+    cin >> deg >> dis;
 
-    dir = (dir * 10 + 1125) / 2250 % 16;
-    w = w / 6.0 + .5;
+    deg = (deg * 10 + 1125) / 2250 % 16;
+    dis = dis / 6.0 + .5;
 
-    vector<string> dirstr { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW" };
+    vector<string> dir { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW" };
 
-    int wind;
-    vector<int> border { 0, 3, 16, 34, 55, 80, 108, 139, 172, 208, 245, 285, 327 };
-    for (int i = 12; i >= 0; i--) {
-        if (w - border[i] >= 0) {
-            wind = i;
-            break;
-        }
-    }
+    vector<int> border { 327, 285, 245, 208, 172, 139, 108, 80, 55, 34, 16, 3, 0 };
+    auto itr = lower_bound(begin(border), end(border), dis, greater<>());
+    int w = end(border) - itr - 1;
 
-    cout << (wind == 0 ? "C" : dirstr[dir]) << " " << wind << endl;
+    cout << (w == 0 ? "C" : dir[deg]) << " " << w << endl;
 }
