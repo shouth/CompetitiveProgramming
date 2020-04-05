@@ -91,7 +91,7 @@ int main() {
 
     combi c(n);
     m64 ans = 0;
-    for (i32 m = 0; m < min(n, k); m++) {
+    for (i32 m = 0; m <= min(n, k); m++) {
         ans += c.c(n, m) * c.h(n-m, m);
     }
 
