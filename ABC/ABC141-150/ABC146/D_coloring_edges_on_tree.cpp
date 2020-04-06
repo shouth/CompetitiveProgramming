@@ -11,7 +11,7 @@ int main() {
         cin >> a >> b, a--, b--;
         tree[a].push_back(b);
         tree[b].push_back(a);
-        ab[i] = make_pair(a, b);
+        ab[i] = {a, b};
     }
 
     vector<int> derivec(n);
@@ -29,7 +29,7 @@ int main() {
         for (auto& e : tree[tmp]) {
             if (visit[e]) continue;
             if (derivec[tmp] == color) color++;
-            derivec[e] = mapc[make_pair(tmp, e)] = mapc[make_pair(e, tmp)] = color++;
+            derivec[e] = mapc[{tmp, e}] = mapc[{e, tmp}] = color++;
             q.push(e);
         }
     }
