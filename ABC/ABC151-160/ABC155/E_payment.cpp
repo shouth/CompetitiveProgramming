@@ -1,18 +1,20 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+using i32 = int_fast32_t;
+using i64 = int_fast64_t;
+
 int main() {
-    string s;
-    cin >> s;
-    int ans = 0;
-    int p = 1;
-    for (int i = 0; i < s.size(); i++) {
-        int n = s[i] - '0';
-        if (n < 5) {
-            ans += n;
-        } else {
-            ans += p + (10 - n), p = 0;
-        }
+    string n;
+    cin >> n;
+
+    i32 dp0 = 0, dp1 = 1;
+    for (auto& e : n) {
+        i32 d = e - '0';
+        tie(dp0, dp1) = make_tuple(
+            min(dp0 + d, dp1 + (10 - d)),
+            min(dp0 + d + 1, dp1 + (10 - (d + 1))));
     }
-    cout << ans << endl;
+
+    cout << dp0 << endl;
 }
