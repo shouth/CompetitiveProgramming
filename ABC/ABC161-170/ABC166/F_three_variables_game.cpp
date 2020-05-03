@@ -10,10 +10,8 @@ constexpr f64 EPS = DBL_EPSILON;
 i64 n, a, b, c;
 vector<string> ss;
 vector<char> ans;
-set<tuple<i64, i64, i64, i64>> dp;
 
 bool dfs(i64 depth, i64 x, i64 y, i64 z) {
-    if (dp.find({ depth, x, y, z }) != dp.end()) return false;
     if (x < 0 || y < 0 || z < 0) return false;
     if (depth == n) return true;
 
@@ -42,7 +40,6 @@ bool dfs(i64 depth, i64 x, i64 y, i64 z) {
     if (dfs(depth + 1, na, nb, nc)) return true;
     ans.pop_back();
 
-    dp.emplace(depth, x, y, z);
     return false;
 }
 
