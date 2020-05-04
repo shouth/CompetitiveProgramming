@@ -12,13 +12,10 @@ void solve() {
     i64 n, m;
     cin >> n >> m;
     vector<i64> hs(n);
-    vector<p64> his(n);
-    for (i64 i = 0; i < n; i++) {
-        cin >> hs[i];
-        his[i] = { hs[i], i };
-    }
-
-    sort(begin(his), end(his), greater());
+    for (auto& h : hs) cin >> h;
+    vector<i64> is(n);
+    iota(begin(is), end(is), 0);
+    sort(begin(is), end(is), [&](i64 i, i64 j) { return hs[i] > hs[j]; });
 
     vector<vector<i64>> p(n);
     for (i64 i = 0; i < m; i++) {
@@ -28,20 +25,16 @@ void solve() {
         p[b].emplace_back(a);
     }
 
-    vector<i64> g(n, -1);
-    for (auto& e : his) {
-        i64 h, i;
-        tie(h, i) = e;
-        if (g[i] != -1) continue;
-        i64 res = 1;
-        for (auto& j : p[i]) {
-            g[j] = 0;
-            res &= h > hs[j];
-        }
-        g[i] = res;
+    i64 ans = 0;
+    vector<i64> g(n);
+    for (auto& i : is) {
+        if (g[i]) continue;
+        g[i] = 1;
+        for (auto& j : p[i]) g[j] = 1;
+        ans += all_of(begin(p[i]), end(p[i]), [&](i64 j) { return hs[i] > hs[j]; });
     }
 
-    cout << accumulate(begin(g), end(g), 0l) << endl;
+    cout << ans << endl;
 }
 
 int main() {
