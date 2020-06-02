@@ -17,8 +17,7 @@ i64 dfs(i64 current, i64 from, i64 depth) {
     if (depth == k / 2) return 1;
     i64 res = 1;
     for (auto& e : graph[current]) {
-        if (e == from) continue;
-        res += dfs(e, current, depth + 1);
+        if (e != from) res += dfs(e, current, depth + 1);
     }
     return res;
 }
@@ -39,7 +38,7 @@ void solve() {
     i64 ans = INF;
     if (k % 2) {
         for (auto& e : edges) {
-            ans = min(ans, n - (dfs(e.first, e.second, 0) + dfs(e.second, e.first, 0)));
+            ans = min(ans, n - dfs(e.first, e.second, 0) - dfs(e.second, e.first, 0));
         }
     } else {
         for (i64 i = 0; i < n; i++) {
