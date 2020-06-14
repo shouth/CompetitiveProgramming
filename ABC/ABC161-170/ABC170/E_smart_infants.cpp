@@ -26,8 +26,7 @@ void solve() {
     }
 
     for (i64 i = 0; i < (i64) 2e5; i++) {
-        if (kindergarten[i].empty()) continue;
-        equality.emplace(*rates[i].begin());
+        if (!kindergarten[i].empty()) equality.emplace(*rates[i].begin());
     }
 
     for (i64 i = 0; i < q; i++) {
