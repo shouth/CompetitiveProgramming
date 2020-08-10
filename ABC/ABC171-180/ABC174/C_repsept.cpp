@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define all(x) begin(x), end(x)
+
+using i64 = int_fast64_t;
+using u64 = uint_fast64_t;
+using f64 = double;
+using p64 = pair<i64, i64>;
+
+constexpr i64 INF = INT_FAST64_MAX / 2;
+
+void solve() {
+    i64 k;
+    cin >> k;
+
+    vector<i64> used(k);
+    i64 ans = 1;
+    i64 sum = 7 % k;
+    while (sum) {
+        if (used[sum]) {
+            cout << -1 << endl;
+            return;
+        }
+        used[sum] = 1;
+        sum = (sum * 10 + 7) % k;
+        ans++;
+    }
+    cout << ans << endl;
+}
+
+int main() {
+    cin.tie(nullptr);
+    ios_base::sync_with_stdio(false);
+    cout << fixed << setprecision(15);
+    solve();
+}
