@@ -1,25 +1,61 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-struct unionfindtree {
-    vector<int> parent;
+#define all(x) begin(x), end(x)
 
-    unionfindtree(int size): parent(size) {
-        iota(begin(parent), end(parent), 0);
+using i64 = int_fast64_t;
+using u64 = uint_fast64_t;
+using f64 = double;
+using p64 = pair<i64, i64>;
+
+constexpr i64 INF = INT_FAST64_MAX / 2;
+
+void solve() {
+    i64 N, M, L;
+    cin >> N >> M >> L;
+
+    auto mat = vector(N, vector(N, INF));
+    for (i64 i = 0; i < N; i++) {
+        mat[i][i] = 0;
+    }
+    for (i64 i = 0; i < M; i++) {
+        i64 A, B, C;
+        cin >> A >> B >> C, A--, B--;
+        mat[A][B] = mat[B][A] = C;
+    }
+    for (i64 i = 0; i < N; i++) {
+        for (i64 j = 0; j < N; j++) {
+            for (i64 k = 0; k < N; k++) {
+                mat[j][k] = min(mat[j][k], mat[j][i] + mat[i][k]);
+            }
+        }
     }
 
-    void unite(int a, int b) {
-        if ((a = find(a)) == (b = find(b))) return;
-        parent[b] = a;
+    for (i64 i = 0; i < N; i++) {
+        for (i64 j = 0; j < N; j++) {
+            mat[i][j] = i == j ? 0 : mat[i][j] > L ? INF : 1;
+        }
+    }
+    for (i64 i = 0; i < N; i++) {
+        for (i64 j = 0; j < N; j++) {
+            for (i64 k = 0; k < N; k++) {
+                mat[j][k] = min(mat[j][k], mat[j][i] + mat[i][k]);
+            }
+        }
     }
 
-    int find(int a) {
-        return (parent[a] == a ? a : parent[a] = find(parent[a]));
+    i64 Q;
+    cin >> Q;
+    for (i64 i = 0; i < Q; i++) {
+        i64 s, t;
+        cin >> s >> t, s--, t--;
+        cout << (mat[s][t] < INF ? mat[s][t] - 1 : -1) << endl;
     }
-};
+}
 
 int main() {
-    int n, m, l;
-    cin >> n >> m >> l;
-
+    cin.tie(nullptr);
+    ios_base::sync_with_stdio(false);
+    cout << fixed << setprecision(15);
+    solve();
 }
