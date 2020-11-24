@@ -10,7 +10,13 @@
                 "-O0",
                 "-std=c++17",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-D_GLIBCXX_DEBUG",
+                "-D_GLIBCXX_DEBUG_PEDANTIC",
+                "-D_FORTIFY_SOURCE=2",
+                "-fsanitize=address",
+                "-fsanitize=undefined",
+                "-fstack-protector"
             ],
             "options": {
                 "cwd": "/usr/bin"
