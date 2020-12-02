@@ -42,15 +42,15 @@ void solve() {
         if (sum > T) continue;
         sum1.emplace_back(sum);
     }
-    sort(all(sum1));
+    sort(rall(sum1));
     sum1.erase(unique(all(sum1)), sum1.end());
 
     i64 ans = 0;
+    u64 idx = 0;
     for (auto& e : sum0) {
-        i64 rem = T - e;
-        auto itr = upper_bound(all(sum1), rem);
-        if (itr == begin(sum1)) continue;
-        ans = max(ans, e + *(itr - 1));
+        while (idx < sum1.size() && e + sum1[idx] > T) idx++;
+        if (idx == sum1.size()) break;
+        ans = max(ans, e + sum1[idx]);
     }
 
     cout << ans << endl;
