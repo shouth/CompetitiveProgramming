@@ -1,5 +1,5 @@
-sample.cpp
-sample.py
+sample*.cpp
+sample*.py
 .vscode/*
 !.vscode/c_cpp_properties.json
 !.vscode/settings.json
