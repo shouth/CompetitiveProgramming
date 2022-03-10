@@ -6,7 +6,7 @@
             "command": "/usr/bin/g++",
             "args": [
                 "-g",
-                "-O2",
+                "-O0",
                 "-std=c++17",
                 "-Wall",
                 "-Wextra",
@@ -61,7 +61,7 @@
             "args": [
                 "-xc++-header",
                 "-g",
-                "-O2",
+                "-O0",
                 "-std=c++17",
                 "-Wall",
                 "-Wextra",
@@ -92,7 +92,7 @@
             "args": [
                 "-xc++-header",
                 "-g",
-                "-O2",
+                "-O0",
                 "-std=c++17",
                 "-Wall",
                 "-Wextra",
