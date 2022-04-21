@@ -31,7 +31,7 @@ void solve() {
     sort(all(CD), greater());
 
     auto hs = multiset<i64>();
-    for (ssize_t i = 0, j = 0; i < N; i++) {
+    for (i64 i = 0, j = 0; i < N; i++) {
         auto [ A, B ] = AB[i];
         for (; j < M; j++) {
             auto [ C, D ] = CD[j];
