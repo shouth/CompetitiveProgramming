@@ -8,25 +8,6 @@
                 "-g",
                 "-O0",
                 "-std=c++17",
-                "-Wall",
-                "-Wextra",
-                "-Wshadow",
-                "-Wformat=2",
-                "-Wfloat-equal",
-                "-Wconversion",
-                "-Wlogical-op",
-                "-Wshift-overflow=2",
-                "-Wduplicated-cond",
-                "-Wcast-qual",
-                "-Wcast-align",
-                "-D_GLIBCXX_DEBUG",
-                "-D_GLIBCXX_DEBUG_PEDANTIC",
-                "-D_FORTIFY_SOURCE=2",
-                "-fsanitize=address,undefined",
-                "-fno-sanitize-recover",
-                "-fstack-protector",
-                "-ftrapv",
-                "-I${workspaceFolder}/build",
                 "-I${workspaceFolder}/ac-library",
                 "${file}"
             ]
@@ -43,89 +24,6 @@
                 "kind": "build",
                 "isDefault": true
             }
-        },
-        {
-            "type": "shell",
-            "label": "create directories for precompiled headers",
-            "command": "mkdir",
-            "args": [
-                "-p",
-                "${workspaceFolder}/build/bits",
-                "${workspaceFolder}/build/atcoder",
-            ]
-        },
-        {
-            "type": "shell",
-            "label": "g++ precompile stdc++ headers",
-            "command": "/usr/bin/g++",
-            "args": [
-                "-xc++-header",
-                "-g",
-                "-O0",
-                "-std=c++17",
-                "-Wall",
-                "-Wextra",
-                "-Wshadow",
-                "-Wformat=2",
-                "-Wfloat-equal",
-                "-Wconversion",
-                "-Wlogical-op",
-                "-Wshift-overflow=2",
-                "-Wduplicated-cond",
-                "-Wcast-qual",
-                "-Wcast-align",
-                "-D_GLIBCXX_DEBUG",
-                "-D_GLIBCXX_DEBUG_PEDANTIC",
-                "-D_FORTIFY_SOURCE=2",
-                "-fsanitize=address,undefined",
-                "-fno-sanitize-recover",
-                "-fstack-protector",
-                "-ftrapv",
-                "-o${workspaceFolder}/build/bits/stdc++.h.gch",
-                "/usr/include/x86_64-linux-gnu/c++/9/bits/stdc++.h"
-            ]
-        },
-        {
-            "type": "shell",
-            "label": "g++ precompile atcoder headers",
-            "command": "/usr/bin/g++",
-            "args": [
-                "-xc++-header",
-                "-g",
-                "-O0",
-                "-std=c++17",
-                "-Wall",
-                "-Wextra",
-                "-Wshadow",
-                "-Wformat=2",
-                "-Wfloat-equal",
-                "-Wconversion",
-                "-Wlogical-op",
-                "-Wshift-overflow=2",
-                "-Wduplicated-cond",
-                "-Wcast-qual",
-                "-Wcast-align",
-                "-D_GLIBCXX_DEBUG",
-                "-D_GLIBCXX_DEBUG_PEDANTIC",
-                "-D_FORTIFY_SOURCE=2",
-                "-fsanitize=address,undefined",
-                "-fno-sanitize-recover",
-                "-fstack-protector",
-                "-ftrapv",
-                "-I${workspaceFolder}/ac-library",
-                "-o${workspaceFolder}/build/atcoder/all.gch",
-                "${workspaceFolder}/ac-library/atcoder/all"
-            ]
-        },
-        {
-            "type": "shell",
-            "label": "g++ precompile headers",
-            "dependsOn": [
-                "create directories for precompiled headers",
-                "g++ precompile stdc++ headers",
-                "g++ precompile atcoder headers"
-            ],
-            "dependsOrder": "sequence"
         }
     ],
     "version": "2.0.0"
