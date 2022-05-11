@@ -2,21 +2,34 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "g++ build active file",
-            "command": "/usr/bin/clang++",
+            "label": "create output directory",
+            "command": "mkdir",
             "args": [
+                "-p",
+                "build/${relativeFileDirname}"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "g++ build active file",
+            "dependsOn": "create output directory",
+            "command": "clang++",
+            "args": [
+                "-g",
                 "-O0",
                 "-Wall",
                 "-Wextra",
                 "-std=c++17",
-                "-I${workspaceFolder}/ac-library",
-                "${file}"
+                "-Iac-library",
+                "${relativeFile}",
+                "-o",
+                "build/${relativeFileDirname}/${fileBasenameNoExtension}"
             ]
         },
         {
             "type": "shell",
             "label": "g++ build and run",
-            "command": "${workspaceFolder}/a.out",
+            "command": "build/${relativeFileDirname}/${fileBasenameNoExtension}",
             "dependsOn": [
                 "g++ build active file"
             ],
