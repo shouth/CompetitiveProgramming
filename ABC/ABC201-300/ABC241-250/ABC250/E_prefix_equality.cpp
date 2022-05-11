@@ -63,10 +63,7 @@ void solve() {
 
     f(b);
     auto c = vector<i64>(N);
-    c[0] = b[0];
-    for (i64 i = 1; i < N; i++) {
-        c[i] = max(b[i], c[i - 1]);
-    }
+    partial_sum(all(b), begin(c), [](i64 x, i64 y) { return max(x, y); });
     g(b);
 
     i64 Q;
