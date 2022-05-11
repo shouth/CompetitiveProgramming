@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 constexpr double EPS = 1e-10;
@@ -9,7 +25,7 @@ int main() {
     cin >> n;
     vector<vector<int64_t>> xy(n, vector<int64_t>(2));
     for (auto& e : xy) cin >> e[0] >> e[1];
-    
+
     int64_t lt90 = 0, eq90 = 0, gt90 = 0;
     for (int i = 0; i < n; i++) {
         vector<double> angles;

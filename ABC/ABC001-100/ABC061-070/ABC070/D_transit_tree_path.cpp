@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 int main() {
@@ -25,7 +41,7 @@ int main() {
             p.push(e.first);
         }
     }
-    
+
     vector<int64_t> ans(q);
     for (auto& e : ans) {
         int64_t x, y;

@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 #define all(x) begin(x), end(x)
@@ -15,7 +31,7 @@ void solve() {
     cin >> n >> l;
     string s;
     cin >> s;
-    
+
     i64 ans = 0, t = 1;
     for (auto& e : s) {
         if (e == '+') t++; else t--;

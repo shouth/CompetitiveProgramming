@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using i64 = int_fast64_t;
@@ -10,7 +26,7 @@ constexpr f64 EPS = DBL_EPSILON;
 void solve() {
     i64 n;
     cin >> n;
-    
+
     i64 ans = 0;
     i64 l = 0, r = 0, lr = 0;
     for (i64 i = 0; i < n; i++) {

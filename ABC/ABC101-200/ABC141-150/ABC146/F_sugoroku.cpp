@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using i32 = int_fast32_t;
@@ -8,7 +24,7 @@ template<typename T>
 struct sparsetable {
     vector<vector<T>> st;
     vector<i32> lookup;
-    
+
     sparsetable(const vector<T> &v) {
         i32 n = v.size();
         st.assign(log2(n) + 1, vector<T>());
@@ -40,7 +56,7 @@ int main() {
 
     vector<i32> idx(n+1);
     for (i32 i = 0; i < n+1; i++) idx[i] = s[i] == '0' ? i : INT32_MAX;
-    
+
     sparsetable<i32> st(idx);
     deque<i32> ans;
     for (i32 i = n, j; i > 0; i = j) {

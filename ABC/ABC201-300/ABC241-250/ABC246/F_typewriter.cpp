@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 #include<atcoder/all>
 
 #define all(x) begin(x), end(x)
@@ -30,7 +46,7 @@ void solve() {
     }
 
     auto table = vector<m64>(27);
-    
+
 
     m64 ans = 0;
     for (i64 i = 1; i < (1 << N); i++) {

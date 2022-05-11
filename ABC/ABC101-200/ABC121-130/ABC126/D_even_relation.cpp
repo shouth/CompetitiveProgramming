@@ -1,10 +1,26 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 int main() {
     int n;
     cin >> n;
-    
+
     vector<vector<pair<int64_t, int64_t>>> link(n+1);
     vector<bool> even(n+1, false), visited(n+1, false);
     for (int i=0; i<n-1; i++) {

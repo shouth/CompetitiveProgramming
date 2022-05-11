@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 int main() {
@@ -7,9 +23,9 @@ int main() {
 
     vector<string> s(h);
     for (auto& e : s) cin >> e;
-    
+
     vector<vector<int>> left(h, vector<int>(w)), right(h, vector<int>(w)), up(h, vector<int>(w)), down(h, vector<int>(w));
-    
+
     for (int y=0; y<h; y++) {
         left[y][0] = (s[y][0] == '.' ? 1 : 0);
         for (int x=1; x<w; x++) {

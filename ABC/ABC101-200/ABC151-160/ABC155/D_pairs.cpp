@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using i32 = int_fast32_t;
@@ -15,7 +31,7 @@ int main() {
         if (e == 0) n0++;
         if (e > 0) np++;
     }
-    
+
     i64 ans = 0;
     if (k <= nn * np) {
         vector<i64> n, p;
@@ -25,7 +41,7 @@ int main() {
         }
         sort(begin(p), end(p));
         sort(begin(n), end(n));
-        
+
         i64 bl = -INT64_MAX / 2, br = -1;
         while (abs(br - bl) > 1) {
             i64 mid = (br + bl) / 2;

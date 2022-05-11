@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 #define all(x) begin(x), end(x)
@@ -29,7 +45,7 @@ void solve() {
                 auto [ y, x ] = q.front(); q.pop();
                 if (s[y][x] == '_') continue;
                 (s[y][x] == '#' ? bcnt : wcnt)++;
-                
+
                 for (i64 k = 0; k < 4; k++) {
                     i64 ny = y + dxy[k], nx = x + dxy[k + 1];
                     if (ny < 0 || h <= ny || nx < 0 || w <= nx) continue;

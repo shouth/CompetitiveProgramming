@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 int main() {
@@ -15,7 +31,7 @@ int main() {
 
     int64_t ans = INT64_MAX;
     for (int xi = 0; xi+1 < n; xi++) {
-        for (int xj = xi+1; xj < n; xj++) {              
+        for (int xj = xi+1; xj < n; xj++) {
             for (int yi = 0; yi+1 < n; yi++) {
                 for (int yj = yi+1; yj < n; yj++) {
                     int64_t left = x[xi].first, right = x[xj].first;

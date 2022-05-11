@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 constexpr int64_t MOD = 1e9 + 7;
@@ -7,7 +23,7 @@ int main() {
     int64_t h, w;
     cin >> h >> w;
     vector<vector<int64_t>> a(h, vector<int64_t>(w));
-    for (auto& e : a) for (auto& f : e) cin >> f; 
+    for (auto& e : a) for (auto& f : e) cin >> f;
 
     vector<vector<int64_t>> dp(h, vector<int64_t>(w, -1));
     vector<int64_t> dxy { 0, 1, 0, -1, 0 };

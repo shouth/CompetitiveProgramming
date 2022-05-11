@@ -1,28 +1,44 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 struct unionfindtree {
     vector<int> parent;
     int group;
-    
+
     unionfindtree(int size): parent(size), group(size) {
         iota(begin(parent), end(parent), 0);
     }
-    
+
     int find(int n) {
         return parent[n] == n ? n : parent[n] = find(parent[n]);
     }
-    
+
     void unite(int n, int m) {
         n = find(n), m = find(m);
         parent[n] = m;
         if (n != m) group--;
     }
-    
+
     bool unified() {
         return group == 1;
     }
-    
+
     bool issame(int n, int m) {
         return find(n) == find(m);
     }

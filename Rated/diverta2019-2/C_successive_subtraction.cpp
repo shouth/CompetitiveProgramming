@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using i64 = int_fast64_t;
@@ -14,7 +30,7 @@ void solve() {
     vector<i64> a(n);
     for (auto& e : a) cin >> e;
     sort(begin(a), end(a));
-    
+
     vector<p64> ans;
     i64 b = lower_bound(begin(a), end(a), 0l) - begin(a);
     if (b == 0) b++;

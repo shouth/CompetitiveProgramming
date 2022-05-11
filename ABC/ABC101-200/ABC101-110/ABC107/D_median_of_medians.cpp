@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 struct bit {
@@ -23,11 +39,11 @@ int main() {
     cin >> n;
     vector<int64_t> a(n);
     for (auto& e : a) cin >> e;
-    
+
     int64_t top = 1e9, bottom = 0;
     while (top - bottom > 1) {
         int64_t target = (top + bottom) / 2;
-        
+
         bit b(n*2+2);
         b.add(n+1, 1);
         int64_t num = 0, sum = 0;

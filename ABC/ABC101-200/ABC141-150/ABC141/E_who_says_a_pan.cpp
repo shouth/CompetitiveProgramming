@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using i32 = int_fast32_t;
@@ -9,7 +25,7 @@ int main() {
     cin >> n;
     string s;
     cin >> s;
-    
+
     i32 ans = 0;
     for (i32 l = 0; l < n; l++) {
         i32 m = n-l;

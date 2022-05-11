@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 int main() {
@@ -6,7 +22,7 @@ int main() {
     cin >> n;
     vector<vector<int64_t>> g(n, vector<int64_t>(n));
     for (auto& e : g) for (auto& f : e) cin >> f;
-    
+
     bitset<90000> c;
     for (int64_t i = 0; i < n; i++) {
         for (int64_t j = 0; j < n; j++) {

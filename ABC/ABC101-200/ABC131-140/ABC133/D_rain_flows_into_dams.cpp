@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 int main() {
@@ -13,7 +29,7 @@ int main() {
     ar[n-1] = a[n-1], ar[n-2] = a[n-2];
     for (int i = 0; i + 2 < n; i += 2) al[i+2] = a[i+2] + al[i];
     for (int i = 1; i + 2 < n; i += 2) al[i+2] = a[i+2] + al[i];
-    for (int i = n - 1; i - 2 >= 0; i -= 2) ar[i-2] = a[i-2] + ar[i]; 
+    for (int i = n - 1; i - 2 >= 0; i -= 2) ar[i-2] = a[i-2] + ar[i];
     for (int i = n - 2; i - 2 >= 0; i -= 2) ar[i-2] = a[i-2] + ar[i];
 
     for (int i = 0; i < n; i++) {

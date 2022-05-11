@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using i64 = int_fast64_t;
@@ -62,7 +78,7 @@ using m64 = modint<MOD>;
 void solve() {
     i64 n;
     cin >> n;
-    
+
     m64 ans = 1;
     i64 x = 0, y = 0, z = 0;
     for (i64 i = 0; i < n; i++) {

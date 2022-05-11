@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using pdouble = pair<double, double>;
@@ -8,7 +24,7 @@ int main() {
     cin >> n >> k;
     vector<pdouble> wp(n);
     for (auto& e : wp) cin >> e.first >> e.second;
-    
+
     double left = 0, right = 100;
     for (double i = 0; i < 100; i++) {
         double middle = (left + right) / 2;
@@ -25,7 +41,6 @@ int main() {
         }
         (salt / solution * 100 > middle ? left : right) = middle;
     }
-    
+
     cout << fixed << setprecision(10) << right << endl;
 }
-

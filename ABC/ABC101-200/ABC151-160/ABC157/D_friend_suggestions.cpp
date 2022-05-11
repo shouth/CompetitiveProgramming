@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using i32 = int_fast32_t;
@@ -20,7 +36,7 @@ struct unionfind {
         if (n == m) return;
         if (s[n] < s[m]) swap(n, m);
         s[n] += s[m];
-        p[m] = n; 
+        p[m] = n;
     }
 
     i32 size(i32 n) {

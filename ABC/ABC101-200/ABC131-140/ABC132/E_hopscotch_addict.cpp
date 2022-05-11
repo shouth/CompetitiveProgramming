@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using i32 = int_fast32_t;
@@ -30,6 +46,6 @@ int main() {
             q.push(e);
         }
     }
-    
+
     cout << (dist[t*3] % 3 == 0 ? dist[t*3] / 3 : -1) << endl;
 }

@@ -1,4 +1,20 @@
-#include<bits/stdc++.h>
+#include <utility>
+#include <bitset>
+#include <tuple>
+#include <string>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <numeric>
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
 using namespace std;
 
 using i64 = int_fast64_t;
@@ -29,7 +45,7 @@ void solve() {
         for (auto& e : m) if (e.first != 0) key = e.first;
         if (m[0] == n / 3 && m[key] == 2 * n / 3) ans = "Yes";
         break;
-        
+
     case 3:
         i64 flag0 = 0, flag1 = 0;
         for (auto& e : m) {
