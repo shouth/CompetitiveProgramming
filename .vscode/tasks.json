@@ -24,7 +24,6 @@
                 "-ftrapv",
                 "-fsanitize=address,undefined",
                 "-fno-sanitize-recover=all",
-                "-D_LIBCPP_DEBUG=1",
                 "-Iac-library",
                 "${relativeFile}",
                 "-o",
