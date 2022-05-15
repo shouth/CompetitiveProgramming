@@ -38,29 +38,19 @@ void solve() {
     auto A = vector<i64>(N);
     for (auto &e : A) cin >> e;
 
-    i64 ans = INF;
-    { // 最初を使う
-        auto dp = vector(N + 1, vector(2, INF));
-        dp[0][0] = 0;
-        for (i64 i = 0; i < N; i++) {
-            // i番目使わない
-            dp[i + 1][0] = dp[i][1];
-            // i番目使う
-            dp[i + 1][1] = min(dp[i][0], dp[i][1]) + A[i];
-        }
-        ans = min({ ans, dp[N][0], dp[N][1] });
+    auto dp = vector<i64>(N + 1);
+    dp[0] = INF, dp[1] = A[0];
+    for (i64 i = 1; i < N; i++) {
+        dp[i + 1] = min(dp[i], dp[i - 1]) + A[i];
     }
-    { // 最初を使わない
-        auto dp = vector(N + 1, vector(2, INF));
-        dp[1][0] = 0;
-        for (i64 i = 1; i < N; i++) {
-            // i番目使わない
-            dp[i + 1][0] = dp[i][1];
-            // i番目使う
-            dp[i + 1][1] = min(dp[i][0], dp[i][1]) + A[i];
-        }
-        ans = min({ ans, dp[N][1] });
+    i64 ans = min(dp[N - 1], dp[N]);
+
+    dp.assign(N + 1, 0);
+    dp[0] = 0, dp[1] = A[0];
+    for (i64 i = 1; i < N; i++) {
+        dp[i + 1] = min(dp[i], dp[i - 1]) + A[i];
     }
+    ans = min(ans, dp[N]);
     cout << ans << endl;
 }
 
