@@ -32,65 +32,49 @@ using m64 = modint1000000007;
 
 constexpr i64 INF = INT_FAST64_MAX / 2;
 
-template<class DerivedT, class RangeT, class ResultT>
-struct MoHelper {
-    using Query = p64;
-    using Self = DerivedT;
-    using Range = RangeT;
-    using Result = ResultT;
+struct MoOp {
+    using Range = std::vector<i64>;
 
-    Self &self() { return static_cast<Self &>(*this); }
-
-    void add_left(const Range &range, i64 i) { self().add(range, i); }
-    void add_right(const Range &range, i64 i) { self().add(range, i); }
-    void erase_left(const Range &range, i64 i) { self().erase(range, i); }
-    void erase_right(const Range &range, i64 i) { self().erase(range, i); }
-
-    static auto process(i64 size, const Range &range, const vector<Query> &queries) {
-        i64 q = (i64) queries.size();
-        i64 bs = size / min<i64>(size, sqrt(q));
-        auto ord = vector<i64>(q);
-        iota(begin(ord), end(ord), 0);
-        sort(begin(ord), end(ord), [&](i64 a, i64 b) {
-            auto [ al, ar ] = queries[a];
-            auto [ bl, br ] = queries[b];
-            i64 ablock = al / bs, bblock = bl / bs;
-            return ablock != bblock ? ablock < bblock : (ablock & 1) ? ar > br : ar < br;
-        });
-
-        i64 l = 0, r = 0;
-        auto result = vector<Result>(queries.size());
-        auto self = Self(size, range);
-        for (auto idx : ord) {
-            auto [ li, ri ] = queries[idx];
-            while (l > li) self.add_left(range, --l);
-            while (r < ri) self.add_right(range, r++);
-            while (l < li) self.erase_left(range, l++);
-            while (r > ri) self.erase_right(range, --r);
-            result[idx] = self.save();
-        }
-        return result;
-    }
-};
-
-struct Mo : MoHelper<Mo, vector<i64>, i64> {
     vector<i64> cnts;
     i64 cnt = 0;
 
-    Mo(i64 size, const Range &range): cnts(size) { }
+    MoOp(i64 size, const Range &range): cnts(size) { }
 
-    void add(const Range &range, i64 i) {
-        cnt += cnts[range[i]]++ & 1;
-    }
+    void add_left(const Range &range, i64 i) { cnt += cnts[range[i]]++ & 1; }
+    void add_right(const Range &range, i64 i) { add_left(range, i); }
 
-    void erase(const Range &range, i64 i) {
-        cnt -= --cnts[range[i]] & 1;
-    }
+    void erase_left(const Range &range, i64 i) { cnt -= --cnts[range[i]] & 1; }
+    void erase_right(const Range &range, i64 i) { erase_left(range, i); }
 
-    Result save() {
-        return cnt;
-    }
+    i64 save() { return cnt; }
 };
+
+template<class Op>
+auto mo(i64 size, const typename Op::Range &range, const vector<p64> &queries) {
+    i64 q = (i64) queries.size();
+    i64 bs = size / min<i64>(size, sqrt(q));
+    auto ord = vector<i64>(q);
+    iota(begin(ord), end(ord), 0);
+    sort(begin(ord), end(ord), [&](i64 a, i64 b) {
+        auto [ al, ar ] = queries[a];
+        auto [ bl, br ] = queries[b];
+        i64 ablock = al / bs, bblock = bl / bs;
+        return ablock != bblock ? ablock < bblock : (ablock & 1) ? ar > br : ar < br;
+    });
+
+    i64 l = 0, r = 0;
+    auto self = Op(size, range);
+    auto result = vector<decltype(self.save())>(queries.size());
+    for (auto idx : ord) {
+        auto [ li, ri ] = queries[idx];
+        while (l > li) self.add_left(range, --l);
+        while (r < ri) self.add_right(range, r++);
+        while (l < li) self.erase_left(range, l++);
+        while (r > ri) self.erase_right(range, --r);
+        result[idx] = self.save();
+    }
+    return result;
+}
 
 void solve() {
     i64 N;
@@ -100,10 +84,10 @@ void solve() {
 
     i64 Q;
     cin >> Q;
-    auto queries = vector<Mo::Query>(Q);
+    auto queries = vector<p64>(Q);
     for (auto &[ l, r ] : queries) cin >> l >> r, l--;
 
-    for (auto &e : Mo::process(N, A, queries)) {
+    for (auto &e : mo<MoOp>(N, A, queries)) {
         cout << e << "\n";
     }
 }
