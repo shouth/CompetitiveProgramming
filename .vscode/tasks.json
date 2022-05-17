@@ -16,7 +16,7 @@
             "command": "clang++",
             "args": [
                 "-g",
-                "-O2",
+                "-O0",
                 "-Wall",
                 "-Wextra",
                 "-pedantic",
