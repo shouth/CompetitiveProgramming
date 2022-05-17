@@ -46,17 +46,21 @@ void solve() {
     }
 
     auto table = vector<m64>(27);
-
+    for (i64 i = 0; i <= 26; i++) table[i] = m64(i).pow(L);
 
     m64 ans = 0;
-    for (i64 i = 1; i < (1 << N); i++) {
-        i64 s = (1 << 26) - 1;
-        for (i64 j = 0; j < N; j++) {
-            if ((i >> j) & 1) s &= S[j];
+    auto f = [&](auto &self, const vector<i64> &v, bool add = true) -> void {
+        if (v.empty()) return;
+        for (i64 i = 0; i < (i64) v.size(); i++) {
+            ans += (add ? 1 : -1) * table[__builtin_popcountll(v[i])];
+            auto d = vector<i64>();
+            for (i64 j = 0; j < i; j++) {
+                d.emplace_back(v[i] & v[j]);
+            }
+            self(self, d, !add);
         }
-        i64 cnt = __builtin_popcountll(s);
-        ans += __builtin_popcountll(i) & 1 ? table[cnt] : -table[cnt];
-    }
+    };
+    f(f, S);
     cout << ans.val() << endl;
 }
 
