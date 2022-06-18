@@ -46,13 +46,45 @@ void solve() {
         highway[B].emplace_back(A);
     }
 
-    i64 L = N - M - 1;
-    if (i64 Dsum = reduce(all(D)); Dsum != 2 * L) {
+    if (reduce(all(D)) != 2 * (N - 1)) {
         cout << -1 << endl;
         return;
     }
 
+    auto build = vector<vector<i64>>();
+    auto visited = vector<bool>(N);
+    auto q = queue<i64>();
+    for (i64 i = 0; i < N; i++) {
+        if (visited[i]) continue;
+        visited[i] = 1;
+        q.emplace(i);
 
+        auto sub = vector<i64>();
+        while (!q.empty()) {
+            auto node = q.front();
+            q.pop();
+
+            for (i64 j = highway[node].size(); j < D[node]; j++) {
+                sub.emplace_back(node);
+            }
+
+            for (auto next : highway[node]) {
+                if (visited[next]) continue;
+                visited[next] = 1;
+                q.emplace(next);
+            }
+        }
+        if (sub.empty()) {
+            cout << -1 << endl;
+            return;
+        }
+        build.emplace_back(std::move(sub));
+    }
+
+    if (build.size() != M + 1) {
+        cout << -1 << endl;
+        return;
+    }
 }
 
 int main() {
