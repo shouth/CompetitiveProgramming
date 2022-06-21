@@ -32,6 +32,8 @@ using m64 = modint1000000007;
 
 constexpr i64 INF = INT_FAST64_MAX / 2;
 
+i64 e() { return 0; }
+
 void solve() {
     i64 N, Q;
     cin >> N >> Q;
@@ -40,10 +42,21 @@ void solve() {
     auto B = vector<i64>(N);
     for (auto &e : B) cin >> e;
 
+    auto C = vector<i64>(N);
+    adjacent_difference(all(A), begin(C));
+    auto D = vector<i64>(N);
+    adjacent_difference(all(B), begin(D));
+
+    auto Cseg = segtree<i64, gcd, e>(C);
+    auto Dseg = segtree<i64, gcd, e>(D);
+
     for (i64 _ = 0; _ < Q; _++) {
         i64 h1, h2, w1, w2;
-        cin >> h1 >> h2 >> w1 >> w2, h1--, h2--, w1--, w2--;
-        
+        cin >> h1 >> h2 >> w1 >> w2;
+        i64 ans = A[h1 - 1] + B[w1 - 1];
+        ans = gcd(ans, Cseg.prod(h1, h2));
+        ans = gcd(ans, Dseg.prod(w1, w2));
+        cout << ans << "\n";
     }
 }
 
