@@ -6,7 +6,7 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang++",
+            "compilerPath": "/home/linuxbrew/.linuxbrew/bin/clang++",
             "intelliSenseMode": "${default}",
             "compilerArgs": [],
             "cStandard": "c11",
