@@ -34,14 +34,30 @@ void solve() {
     i64 L, R;
     cin >> L >> R;
 
-    i64 ans = 0;
-    for (i64 i = L; i <= R; ++i) {
-        for (i64 j = i; j <= i; ++j) {
-            i64 g = gcd(i, j);
-            if (g != 1 && g != i && g != j) ++ans;
+    auto factor_cnt = vector<i64>(R + 1);
+    for (i64 i = 2; i <= R; ++i) {
+        if (factor_cnt[i] == 0) {
+            for (i64 j = i; j <= R; j += i) {
+                ++factor_cnt[j];
+            }
+            for (i64 j = i * i; j <= R; j += i * i) {
+                factor_cnt[j] = -INF;
+            }
         }
     }
-    cout << ans << endl;
+
+    i64 ans = 0;
+    for (i64 i = 2; i <= R; ++i) {
+        if (factor_cnt[i] >= 0) {
+            i64 cnt = R / i - (L - 1) / i;
+            i64 tmp = cnt * (cnt - 1) / 2;
+            ans += factor_cnt[i] % 2 ? tmp : -tmp;
+        }
+    }
+    for (i64 i = max<i64>(2, L); i <= R; ++i) {
+        ans -= R / i - 1;
+    }
+    cout << ans * 2 << endl;
 }
 
 int main() {
