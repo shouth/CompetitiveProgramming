@@ -5,4 +5,5 @@ build/*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.cache/*
 a.out
