@@ -1,48 +1,29 @@
 {
     "tasks": [
         {
-            "type": "shell",
-            "label": "create output directory",
-            "command": "mkdir",
-            "args": [
-                "-p",
-                "build/${relativeFileDirname}"
-            ]
+            "type": "cmake",
+            "label": "cmake build",
+            "command": "build",
+            "targets": [
+                "${fileBasenameNoExtension}"
+            ],
+            "group": "build",
+            "problemMatcher": [ "$gcc" ],
+            "detail": "CMake template build task"
         },
         {
             "type": "shell",
-            "label": "g++ build active file",
-            "dependsOn": "create output directory",
-            "command": "clang++",
-            "args": [
-                "-g",
-                "-O0",
-                "-Wall",
-                "-Wextra",
-                "-pedantic",
-                "-std=c++17",
-                "-ftrapv",
-                "-fsanitize=address,undefined",
-                "-fno-sanitize-recover=all",
-                "-Iac-library",
-                "${relativeFile}",
-                "-o",
-                "build/${relativeFileDirname}/${fileBasenameNoExtension}"
-            ]
-        },
-        {
-            "type": "shell",
-            "label": "g++ build and run",
-            "command": "build/${relativeFileDirname}/${fileBasenameNoExtension}",
+            "label": "build active file and run",
+            "command": "build/${fileBasenameNoExtension}",
             "dependsOn": [
-                "g++ build active file"
+                "cmake build"
             ],
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
-        }
+        },
     ],
     "version": "2.0.0"
 }
