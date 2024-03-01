@@ -1,4 +1,3 @@
-#include <initializer_list>
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Weverything"
 
