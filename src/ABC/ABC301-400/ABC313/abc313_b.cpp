@@ -1,10 +1,10 @@
+#include <bitset>
 #include <cmath>
 #include <cstdint>
 #include <iomanip>
 #include <iostream>
 #include <limits>
 #include <utility>
-#include <vector>
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Weverything"
@@ -29,30 +29,31 @@ auto solve() -> void
   i64 N, M;
   cin >> N >> M;
 
-  auto table = vector(N, vector(N, i64{ 0 }));
+  auto table = std::array<std::bitset<50>, 50>{};
+  for (i64 i = 0; i < N; ++i) {
+    table[i][i] = true;
+  }
+
   for (i64 i = 0; i < M; ++i) {
     i64 A, B;
     cin >> A >> B, --A, --B;
-    table[A][B] = 1;
+    table[A][B] = true;
   }
 
   for (i64 k = 0; k < N; ++k) {
     for (i64 i = 0; i < N; ++i) {
       for (i64 j = 0; j < N; ++j) {
-        if (table[i][j] == 0 and table[i][k] == 1 and table[k][j] == 1) {
-          table[i][j] = 1;
-        }
+        table[i][j] = table[i][j] | (table[i][k] & table[k][j]);
       }
     }
   }
 
   for (i64 i = 0; i < N; ++i) {
-    if (reduce(begin(table[i]), end(table[i]), i64{ 0 }) == N - 1) {
+    if (table[i].count() == N) {
       cout << i + 1 << endl;
       return;
     }
   }
-
   cout << -1 << endl;
 }
 
