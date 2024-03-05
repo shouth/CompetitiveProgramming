@@ -20,6 +20,7 @@ foreach(source ${SOURCES})
       "$<$<CONFIG:Debug>:_GLIBCXX_DEBUG;_GLIBCXX_DEBUG_PEDANTIC;_FORTIFY_SOURCE=2;_LIBCPP_DEBUG=1>")
   target_compile_options("${stem}"
     PRIVATE
+      -std=c++20
       "$<$<CONFIG:Debug>:-ftrapv;-fsanitize=address,undefined;-fno-sanitize-recover=all>")
   target_link_options("${stem}"
     PRIVATE
