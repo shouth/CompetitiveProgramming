@@ -18,11 +18,8 @@ endif()
 # Set flags for targets
 function(target_set_flags target)
   target_link_libraries("${target}" PRIVATE ac-library)
-  set_target_properties("${target}"
-    PROPERTIES
-      CXX_STANDARD 20
-      CXX_STANDARD_REQUIRED YES
-      CXX_EXTENSIONS NO)
+  target_compile_features("${target}" PRIVATE cxx_std_20)
+  set_target_properties("${target}" PROPERTIES CXX_EXTENSIONS NO)
 
   if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions("${target}"
