@@ -20,28 +20,18 @@ function(target_set_flags target)
   target_link_libraries("${target}" PRIVATE ac-library)
   target_compile_features("${target}" PRIVATE cxx_std_20)
   set_target_properties("${target}" PROPERTIES CXX_EXTENSIONS NO)
-
-  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions("${target}"
-      PRIVATE
-        # For libstdc++
-        _GLIBCXX_DEBUG
-        _GLIBCXX_DEBUG_PEDANTIC
-        _GLIBCXX_DEBUG_BACKTRACE
-        _FORTIFY_SOURCE=2
-
-        # For libc++
-        _LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG)
-    target_compile_options("${target}"
-      PRIVATE
-        -ftrapv
-        -fsanitize=address,undefined
-        -fno-omit-frame-pointer
-        -fno-sanitize-recover=all)
-    target_link_options("${target}"
-      PRIVATE
-        -fsanitize=address,undefined)
-  endif()
+  target_compile_definitions("${target}"
+    PRIVATE
+      # For libstdc++
+      "$<$<CONFIG:DEBUG>:_GLIBCXX_DEBUG;_GLIBCXX_DEBUG_PEDANTIC;_GLIBCXX_SANITIZE_VECTOR;_FORTIFY_SOURCE=2>"
+      # For libc++
+      "$<$<CONFIG:DEBUG>:_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG>")
+  target_compile_options("${target}"
+    PRIVATE
+      "$<$<CONFIG:DEBUG>:-ftrapv;-fsanitize=address,undefined;-fno-omit-frame-pointer;-fno-sanitize-recover=all>")
+  target_link_options("${target}"
+    PRIVATE
+      "$<$<CONFIG:DEBUG>:-fsanitize=address,undefined>")
 endfunction()
 
 # Create precompiled header
