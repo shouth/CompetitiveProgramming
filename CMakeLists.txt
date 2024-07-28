@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(CompetitiveProgramming)
 
+# Fetch AtCoder Library
 include(FetchContent)
 FetchContent_Populate(
   ac-library
@@ -9,6 +10,12 @@ FetchContent_Populate(
 add_library(ac-library INTERFACE)
 target_include_directories(ac-library INTERFACE "${ac-library_SOURCE_DIR}")
 
+# Check compiler is GCC or Clang
+if(NOT CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  message(FATAL_ERROR "Unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")
+endif()
+
+# Set flags for targets
 function(target_set_flags target)
   target_link_libraries("${target}" PRIVATE ac-library)
   set_target_properties("${target}"
@@ -17,43 +24,29 @@ function(target_set_flags target)
       CXX_STANDARD_REQUIRED YES
       CXX_EXTENSIONS NO)
 
-  if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-      target_compile_definitions("${target}"
-        PRIVATE
-          _GLIBCXX_DEBUG
-          _GLIBCXX_DEBUG_PEDANTIC
-          _FORTIFY_SOURCE=2)
-      target_compile_options("${target}"
-        PRIVATE
-          -ftrapv
-          -fsanitize=address,undefined
-          -fno-omit-frame-pointer
-          -fno-sanitize-recover=all)
-      target_link_options("${target}"
-        PRIVATE
-          -fsanitize=address,undefined)
-    endif()
-  elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-      target_compile_definitions("${target}"
-        PRIVATE
-          _LIBCPP_DEBUG=1)
-      target_compile_options("${target}"
-        PRIVATE
-          -ftrapv
-          -fsanitize=address,undefined
-          -fno-omit-frame-pointer
-          -fno-sanitize-recover=all)
-      target_link_options("${target}"
-        PRIVATE
-          -fsanitize=address,undefined)
-    endif()
-  else()
-    message(FATAL_ERROR "Unsupported compiler")
+  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions("${target}"
+      PRIVATE
+        # For libstdc++
+        _GLIBCXX_DEBUG
+        _GLIBCXX_DEBUG_PEDANTIC
+        _FORTIFY_SOURCE=2
+
+        # For libc++
+        _LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG)
+    target_compile_options("${target}"
+      PRIVATE
+        -ftrapv
+        -fsanitize=address,undefined
+        -fno-omit-frame-pointer
+        -fno-sanitize-recover=all)
+    target_link_options("${target}"
+      PRIVATE
+        -fsanitize=address,undefined)
   endif()
 endfunction()
 
+# Create precompiled header
 add_custom_command(
   OUTPUT "${CMAKE_BINARY_DIR}/pch.cpp"
   COMMAND "${CMAKE_COMMAND}" -E touch "${CMAKE_BINARY_DIR}/pch.cpp"
@@ -93,6 +86,7 @@ target_precompile_headers(pch
     "<vector>")
 target_set_flags(pch)
 
+# Create targets
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp")
 foreach(source ${SOURCES})
   cmake_path(GET source STEM target)
