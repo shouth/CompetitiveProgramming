@@ -30,6 +30,7 @@ function(target_set_flags target)
         # For libstdc++
         _GLIBCXX_DEBUG
         _GLIBCXX_DEBUG_PEDANTIC
+        _GLIBCXX_DEBUG_BACKTRACE
         _FORTIFY_SOURCE=2
 
         # For libc++
